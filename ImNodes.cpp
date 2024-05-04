@@ -28,6 +28,7 @@
 
 #include <imgui_internal.h>
 #include <limits>
+#include <cmath>
 
 namespace ImNodes
 {
