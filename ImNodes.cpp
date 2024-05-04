@@ -36,8 +36,8 @@ CanvasState* gCanvas = nullptr;
 
 bool operator ==(const ImVec2& a, const ImVec2& b)
 {
-    return abs(a.x - b.x) < std::numeric_limits<float>::epsilon() &&
-           abs(a.y - b.y) < std::numeric_limits<float>::epsilon();
+    return std::abs(a.x - b.x) < std::numeric_limits<float>::epsilon() &&
+           std::abs(a.y - b.y) < std::numeric_limits<float>::epsilon();
 }
 
 enum _ImNodesState
@@ -209,7 +209,7 @@ bool RenderConnection(const ImVec2& input_pos, const ImVec2& output_pos, float t
 #else
     ImVec2 closest_pt = ImBezierCubicClosestPointCasteljau(input_pos, p2, p3, output_pos, ImGui::GetMousePos(), style.CurveTessellationTol);
 #endif
-    float min_square_distance = ImFabs(ImLengthSqr(ImGui::GetMousePos() - closest_pt));
+    float min_square_distance = ImFstd::abs(ImLengthSqr(ImGui::GetMousePos() - closest_pt));
     bool is_close = min_square_distance <= thickness * thickness;
 #if IMGUI_VERSION_NUM < 18000
     draw_list->AddBezierCurve(input_pos, p2, p3, output_pos, is_close ? canvas->Colors[ColConnectionActive] : canvas->Colors[ColConnection], thickness, 0);
